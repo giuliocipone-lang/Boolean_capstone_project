@@ -1,0 +1,65 @@
+41_983 è il dataset Incidenti, morti e feriti - comuni.
+Le dimensioni sono: FREQ.REF_AREA.DATA_TYPE.RESULT
+
+FREQ
+id="CL_FREQ"
+URL: https://esploradati.istat.it/SDMXWS/rest/codelist/IT1/CL_FREQ
+Name: Frequenza
+Valori possibili: <br>
+Descrizione
+A	annuale
+B	business
+D	giornaliero
+E	event
+H	semestrale
+M	mensile
+Q	trimestrale
+W	settimanale
+
+Disponibile: A
+
+
+REF_AREA
+codice identificativo per ogni comune
+
+
+DATA_TYPE
+id="CL_TIPO_DATO22"
+URL: https://esploradati.istat.it/SDMXWS/rest/codelist/IT1/CL_TIPO_DATO22
+Name: Tipo dato
+Valori possibili:
+KILLINJ morti e feriti
+VEHICINV veicoli coinvolti in incidenti stradali
+ROADACC incidenti stradali con lesioni alle persone
+VEHICNEW veicoli nuovi di fabbrica
+VEHICFLEET parco veicolare
+KILLEDINDX morti in incidenti stradali - rispetto al totale degli incidenti (valori per cento)
+INJUREDINDX feriti in incidenti stradali - rispetto al totale degli incidenti (valori per cento)
+
+Disponibile: KILLINJ,ROADACC
+Questi due codici indicano una dimensione, il cui valore è poi espresso nella colonna OBS_VALUE.
+KILLINJ ha due sotto dimensioni: M e F
+ROADACC ha una sola sotto dimensione che è 9.
+
+
+RESULT
+id="CL_ESITO"
+URL: https://esploradati.istat.it/SDMXWS/rest/codelist/IT1/CL_ESITO
+Name: Esito
+Valori possibili:
+M Morto
+F Ferito
+9 Totale
+
+Disponibile: M, F, 9
+
+
+Schema:
+DATA_TYPE
+   │
+   ├── KILLINJ
+   │      ├── M → morti
+   │      └── F → feriti
+   │
+   └── ROADACC
+          └── 9 → incidenti
