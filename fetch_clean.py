@@ -39,18 +39,17 @@ def fetch_clean():
         dfs.append(df)
     df_comuni_raw = pd.concat(dfs, ignore_index=True)
 #clean
-    df_comuni_raw = df_comuni_raw[['PRO_COM', 'COMUNE', 'AREA_KMQ', 'POP_RES', 'ANNO_POP_RES', 'COD_RIP', 'COD_REG', 'COD_UTS']]
-    df_comuni_raw["ANNO_POP_RES"] = df_comuni_raw["ANNO_POP_RES"].astype(int)
+    df_comuni_raw = df_comuni_raw[['PRO_COM', 'COMUNE', 'AREA_KMQ', 'POP_RES', 'ANNO_AREA', 'COD_RIP', 'COD_REG', 'COD_UTS']]
+    df_comuni_raw["ANNO_AREA"] = df_comuni_raw["ANNO_AREA"].astype(int)
 
 #MERGE
-    df_raw = df_incidenti_raw_pivot.merge(df_comuni_raw, how='left', left_on=['REF_AREA', 'TIME_PERIOD'], right_on=['PRO_COM', 'ANNO_POP_RES'])
+    df_raw = df_incidenti_raw_pivot.merge(df_comuni_raw, how='inner', left_on=['REF_AREA', 'TIME_PERIOD'], right_on=['PRO_COM', 'ANNO_AREA'])
 
     df_raw = df_raw[['COMUNE','REF_AREA','AREA_KMQ','POP_RES', '9', 'F', 'M','TIME_PERIOD']]
     df_raw = df_raw.rename(columns={"COMUNE": "Nome Comune","REF_AREA": "Codice Comune", "AREA_KMQ": "Area(kmq)", "POP_RES": "Popolazione", "9": "Incidenti", "F": "Feriti", "M": "Morti", "TIME_PERIOD": "Anno" })
     df_raw[['Popolazione','Incidenti', 'Feriti', 'Morti']] = df_raw[['Popolazione','Incidenti', 'Feriti', 'Morti']].round()
     df_raw[['Popolazione','Incidenti', 'Feriti', 'Morti']] = df_raw[['Popolazione','Incidenti', 'Feriti', 'Morti']].astype("Int64")
 
-    df_raw = df_raw[df_raw['Nome Comune'].notna()].reset_index(drop=True)
 
     df_raw.to_csv('data/incidenti_comuni.csv', index=False)
 
