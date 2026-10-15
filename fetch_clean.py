@@ -52,7 +52,7 @@ def fetch_clean():
     df_raw[['Popolazione','Incidenti', 'Feriti', 'Morti']] = df_raw[['Popolazione','Incidenti', 'Feriti', 'Morti']].astype("Int64")
     df_raw['Area(kmq)'] = round(df_raw['Area(kmq)'], 2)
     
-    df_raw['Nome Comune'] = df_raw['Nome Comune'].fillna('None')
+    df_raw['Nome Comune'] = df_raw['Nome Comune'].fillna('None (TO)')
 
 #Segmento popolazione
     df_raw["Ampiezza demografica - Theme"] = [
