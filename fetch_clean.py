@@ -53,6 +53,7 @@ def fetch_clean():
     df_raw['Area(kmq)'] = round(df_raw['Area(kmq)'], 2)
     
     df_raw['Nome Comune'] = df_raw['Nome Comune'].fillna('None (TO)')
+    print(df_raw['Nome Comune'].isnull().sum())  # deve stampare 0 qui
 
 #Segmento popolazione
     df_raw["Ampiezza demografica - Theme"] = [
